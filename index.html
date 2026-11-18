@@ -24,7 +24,8 @@
 
    2) ATUALIZADO: data e hora da última atualização (dia/mês/ano hora:minuto).
 
-   3) ETAPAS: situação de cada etapa: "pendente", "andamento" ou "feito",
+   3) ETAPAS: situação de cada etapa: "pendente", "andamento", "feito"
+      ou "oculto" (a etapa não aparece na página),
       e o texto que aparece embaixo dela.
    ===================================================================== */
 window.LIJEN_CFG = {
@@ -46,7 +47,7 @@ window.LIJEN_CFG = {
   ],
 
   etapas: [
-    ["pendente",  "Loja, modelo e valor serão publicados aqui."],                         // 1. Orçamento do freezer
+    ["oculto",    "Loja, modelo e valor serão publicados aqui."],                         // 1. Orçamento do freezer (oculto)
     ["andamento", "De 18/11 a 30/11. Cada doação conferida entra no valor arrecadado."],  // 2. Arrecadação entre as famílias
     ["pendente",  "A nota fiscal da compra será publicada aqui."],                        // 3. Compra com nota fiscal
     ["pendente",  "Foto do freezer funcionando na cozinha do Lar."]                       // 4. Freezer instalado
@@ -153,7 +154,7 @@ section.block{padding-block:30px}
 .hook{background:var(--blue-deep);color:#fff;border-radius:14px;padding:12px 14px;font-size:.98rem}
 .hook b{color:var(--gold)}
 
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
 .step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px}
 .step .n{font-family:var(--serif);font-weight:800;font-size:1.4rem;color:var(--ink-soft)}
 .chip{align-self:flex-start;font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
@@ -294,7 +295,7 @@ function renderBody(st){
   '<p class="muted" style="font-size:.88rem">O comprovante vai direto para o WhatsApp do Lar, (81) 98536-1401. Esta página não guarda seus dados.</p></form>'+
 '</div></div></section>'+
 '<section class="block" id="transparencia"><div class="wrap"><span class="eyebrow">Transparência</span><h2>Prestação de contas, etapa por etapa</h2>'+
-  '<ol class="steps">'+st.etapas.map(function(e,i){var lab={feito:"Concluído",andamento:"Em andamento",pendente:"Pendente"}[e.s]||"Pendente";return '<li class="step"><span class="n">0'+(i+1)+'</span><span class="chip '+esc(e.s)+'">'+lab+'</span><h3>'+esc(e.t)+'</h3><p>'+esc(e.n)+'</p></li>';}).join("")+'</ol>'+
+  '<ol class="steps">'+st.etapas.filter(function(e){return e.s!=="oculto";}).map(function(e,i){var lab={feito:"Concluído",andamento:"Em andamento",pendente:"Pendente"}[e.s]||"Pendente";return '<li class="step"><span class="n">0'+(i+1)+'</span><span class="chip '+esc(e.s)+'">'+lab+'</span><h3>'+esc(e.t)+'</h3><p>'+esc(e.n)+'</p></li>';}).join("")+'</ol>'+
   '<ul class="commit"><li>Cada doação conferida entra no valor arrecadado desta página.</li><li>Os nomes de quem doa não são divulgados.</li><li>Nota fiscal e foto do freezer publicadas aqui após a compra.</li><li>'+esc(st.excedente)+'</li></ul>'+
 '</div></section>'+
 
