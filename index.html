@@ -1,4 +1,49 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Campanha das famílias do Lar dos Idosos Jesus de Nazaré (Igarassu-PE) para comprar um freezer novo. Meta de R$ 4.500 até 30/11.">
+<meta property="og:title" content="Campanha Freezer novo · Lar Jesus de Nazaré">
+<meta property="og:description" content="Meta de R$ 4.500 até 30/11. Acompanhe o valor arrecadado e envie seu comprovante.">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+</head>
+<body>
+<script>
+/* =====================================================================
+   ATUALIZE A CAMPANHA AQUI (é só editar este bloco e tocar em "Commit changes").
+   A página no ar atualiza sozinha em 1 a 2 minutos.
+
+   1) DOAÇÕES: para cada doação conferida, acrescente uma linha assim:
+        ["dia/mês", valor],
+      Exemplos:
+        ["18/11", 100],
+        ["19/11", 50],
+        ["20/11", "150,50"],   <- com centavos, coloque o valor entre aspas
+      Não coloque nomes: a página mostra só o total.
+
+   2) ATUALIZADO: data e hora da última atualização (dia/mês/ano hora:minuto).
+
+   3) ETAPAS: situação de cada etapa: "pendente", "andamento" ou "feito",
+      e o texto que aparece embaixo dela.
+   ===================================================================== */
+window.LIJEN_CFG = {
+  atualizado: "18/11/2026 14:42",
+
+  doacoes: [
+    // ["18/11", 100],
+    ["18/11", 50],
+    ["18/11", 30],
+  ],
+
+  etapas: [
+    ["pendente",  "Loja, modelo e valor serão publicados aqui."],                         // 1. Orçamento do freezer
+    ["andamento", "De 18/11 a 30/11. Cada doação conferida entra no valor arrecadado."],  // 2. Arrecadação entre as famílias
+    ["pendente",  "A nota fiscal da compra será publicada aqui."],                        // 3. Compra com nota fiscal
+    ["pendente",  "Foto do freezer funcionando na cozinha do Lar."]                       // 4. Freezer instalado
+  ]
+};
+</script>
 <title>Campanha Freezer LIJEN</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -173,6 +218,11 @@ var LOGO="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAEPCAYAAADSw3WzAAAK
 var RESET=":root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}";
 var FONTS='<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,600&display=swap">';
 var STATE=JSON.parse(document.getElementById("state").textContent);
+if(window.LIJEN_CFG){(function(c){
+  if(Array.isArray(c.doacoes)){STATE.doacoes=c.doacoes.filter(function(r){return r&&r.length>1;}).map(function(r,i){var p=String(r[0]).split("/");var v=parseFloat(String(r[1]).replace(/\./g,"").replace(",","."));if(String(r[1]).indexOf(",")<0)v=parseFloat(String(r[1]));return {id:i+1,data:"2026-"+("0"+p[1]).slice(-2)+"-"+("0"+p[0]).slice(-2),valor:isFinite(v)?v:0,nome:"",exibir:false,forma:r[2]||"PIX"};});}
+  if(c.atualizado){var m=String(c.atualizado).match(/(\d+)\/(\d+)\/(\d+)\s+(\d+):(\d+)/);if(m)STATE.atualizado=m[3]+"-"+("0"+m[2]).slice(-2)+"-"+("0"+m[1]).slice(-2)+"T"+("0"+m[4]).slice(-2)+":"+m[5]+":00-03:00";}
+  if(Array.isArray(c.etapas))c.etapas.forEach(function(e,i){if(STATE.etapas[i]&&e){if(e[0])STATE.etapas[i].s=e[0];if(e[1])STATE.etapas[i].n=e[1];}});
+})(window.LIJEN_CFG);}
 var MAIN_SRC=document.getElementById("main").textContent;
 var CSS_SRC=document.getElementById("css").textContent;
 
@@ -198,7 +248,7 @@ function renderBody(st){
 '<section class="hero"><div class="wrap hero-grid"><div>'+
   '<span class="eyebrow">Campanha de doação · '+esc(dmy(st.inicio).slice(0,5))+' a '+esc(dmy(st.prazo).slice(0,5))+'</span>'+
   '<h1 style="margin-top:10px">Um <em>freezer novo</em> para a cozinha do Lar</h1>'+
-  '<p class="lead">É nele que guardamos os alimentos das 6 refeições por dia dos nossos 40 residentes. Esta campanha é só entre familiares e amigos próximos, e cada real arrecadado aparece nesta página.</p>'+
+  '<p class="lead">É nele que guardamos os alimentos das 6 refeições por dia dos nossos 48 residentes. Esta campanha é só entre familiares e amigos próximos, e cada real arrecadado aparece nesta página.</p>'+
   '<div class="panel" aria-live="polite">'+
     '<div class="raised"><small>Arrecadado até agora</small><b class="num">'+brl(t)+'</b> <span>de '+brl(st.meta)+'</span></div>'+
     '<div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(pct*100)+'" aria-label="Progresso da campanha"><i style="width:'+(pct*100)+'%"></i></div>'+
@@ -369,4 +419,5 @@ if(window.claude&&window.claude.use){
 })();
 </script>
 
-</body></html>
+</body>
+</html>
